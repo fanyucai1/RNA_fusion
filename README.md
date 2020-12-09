@@ -1,6 +1,10 @@
 # RNAseq-fusion学习笔记
 
 
+
+
+## 参考文献
+
 * [Conesa A, Madrigal P, Tarazona S, et al. A survey of best practices for RNA-seq data analysis[J]. Genome biology, 2016, 17(1): 13.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
 
 * [Haas B J, Dobin A, Li B, et al. Accuracy assessment of fusion transcript detection via read-mapping and de novo fusion transcript assembly-based methods[J]. Genome biology, 2019, 20(1): 213.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1842-9)

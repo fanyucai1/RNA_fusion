@@ -1,4 +1,4 @@
-# RNAseq-fusion学习笔记
+# RNAseq学习笔记
 
 
 

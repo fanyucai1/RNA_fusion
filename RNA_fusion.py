@@ -28,7 +28,7 @@ if not os.path.isfile('%s/raw_data/%s'%(args.outdir,os.path.basename(args.pe1)))
 ###############################
 docker_raw="docker run -t -i -v %s:/reference/ -v %s:/project/ %s "%(args.ref,args.outdir,docker_name)
 ###############################run pizzly
-if os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
+if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
     docker_cmd=docker_raw+"/software/kallisto quant -i /reference/kallisto/index.idx --fusion " \
                           "-o /project/pizzy/output /project/raw_data/%s /project/raw_data/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
     subprocess.check_call(docker_cmd,shell=True)

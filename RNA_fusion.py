@@ -41,7 +41,7 @@ if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
                    "--fasta /reference/kallisto/Homo_sapiens.GRCh38.cdna.all.fa.gz --output /project/pizzy/output/%s /project/pizzy/output/fusion.txt"%(args.prefix)
     subprocess.check_call(docker_cmd1,shell=True)
 if not os.path.exists("%s/pizzy/output/%s_genetable.txt"%((args.outdir,args.prefix))):
-    docker_tmp=docker_raw+"/software/python3/Python-v3.7.0/bin/python3 /software/pizzly-0.37.3/scripts//software/pizzly-0.37.3/scripts/flatten_json.py " \
+    docker_tmp=docker_raw+"/software/python3/Python-v3.7.0/bin/python3 /software/pizzly-0.37.3/scripts/flatten_json.py " \
                           "/project/pizzy/output/%s.json /project/pizzy/output/%s_genetable.txt"%(args.prefix,args.prefix)
     subprocess.check_call(docker_tmp,shell=True)
 ###############################star_fusion(https://github.com/STAR-Fusion/STAR-Fusion/wiki)
@@ -53,7 +53,8 @@ if not os.path.exists('%s/Arriba/fusions.tsv'%(args.outdir)):
     docker_cmd3=docker_raw+" sh /reference/arriba/arriba_fusion.sh /project/raw_data/%s /project/raw_data/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
     subprocess.check_call(docker_cmd3,shell=True)
 ###############################fusioncatcher123
-docker_cmd4=docker_raw+" /software/fusioncatcher-1.20/bin/fusioncatcher -d /reference/fusioncatcher/human_v98/ -o /project/fusioncatcher/ -i /project/raw_data/ --config=/reference/fusioncatcher/configuration.cfg"
-subprocess.check_call(docker_cmd4,shell=True)
+if not os.path.exists( '%s/fusioncatcher/final-list_candidate-fusion-genes.txt'%(args.outdir)):
+    docker_cmd4=docker_raw+" /software/fusioncatcher-1.20/bin/fusioncatcher -d /reference/fusioncatcher/human_v98/ -o /project/fusioncatcher/ -i /project/raw_data/ --config=/reference/fusioncatcher/configuration.cfg"
+    subprocess.check_call(docker_cmd4,shell=True)
 ###############################fusion_report(https://github.com/matq007/fusion-report)
 #docker_cmd5=docker_raw+" /software/python3/Python-v3.7.0/bin/fusion_report run %s /project/fusion_report /reference/fusion_report/ -arriba /project/ --pizzly --fusioncatcher --starfusion  "

@@ -11,6 +11,7 @@ parse.add_argument("-p2","--pe2",help="R2 fastq",required=True)
 parse.add_argument("-r","--ref",help="reference data directory",required=True)
 parse.add_argument("-p","--prefix",help="prefix of output",required=True)
 parse.add_argument("-o","--outdir",help="output directory",required=True)
+parse.add_argument("-d","--dragen",help="dragen RNA fusion result",default="false")
 args=parse.parse_args()
 ###############################
 if not os.path.exists(args.outdir):
@@ -25,6 +26,9 @@ if not os.path.isfile("%s/raw_data/%s" %(args.outdir,os.path.basename(args.pe1))
     subprocess.check_call('mv %s %s/raw_data'%(args.pe1,args.outdir),shell=True)
 if not os.path.isfile('%s/raw_data/%s'%(args.outdir,os.path.basename(args.pe1))):
     subprocess.check_call('mv %s %s/raw_data'%(args.pe2,args.outdir),shell=True)
+if args.dragen!="false" and os.path.exists(args.dragen):
+    subprocess.check_call('mkdir -p %s/dragen_RNA'%(args.outdir),shell=True)
+    subprocess.check_call('cp %s %s/dragen_RNA/'%(args.dragen,args.outdir),shell=True)
 ###############################
 docker_raw="docker run -t -i -v %s:/reference/ -v %s:/project/ %s "%(args.ref,args.outdir,docker_name)
 ###############################pizzy(https://github.com/pmelsted/pizzly)

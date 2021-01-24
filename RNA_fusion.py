@@ -27,7 +27,7 @@ if not os.path.isfile('%s/raw_data/%s'%(args.outdir,os.path.basename(args.pe1)))
     subprocess.check_call('mv %s %s/raw_data'%(args.pe2,args.outdir),shell=True)
 ###############################
 docker_raw="docker run -t -i -v %s:/reference/ -v %s:/project/ %s "%(args.ref,args.outdir,docker_name)
-###############################run pizzly
+###############################pizzy(https://github.com/pmelsted/pizzly)
 if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
     docker_cmd=docker_raw+"/software/kallisto quant -i /reference/kallisto/index.idx --fusion " \
                           "-o /project/pizzy/output /project/raw_data/%s /project/raw_data/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
@@ -36,10 +36,10 @@ if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
                    "--align-score 2 --insert-size 400 " \
                    "--fasta /reference/kallisto/Homo_sapiens.GRCh38.cdna.all.fa.gz --output /project/pizzy/output/%s /project/pizzy/output/fusion.txt"%(args.prefix)
     subprocess.check_call(docker_cmd1,shell=True)
-###############################star_fusion
+###############################star_fusion(https://github.com/STAR-Fusion/STAR-Fusion/wiki)
 docker_cmd2=docker_raw+" sh /reference/STAR_fusion.sh /project/raw_data/%s /project/raw_data/%s /project/star_fusion"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
 subprocess.check_call(docker_cmd2,shell=True)
-###############################Arriba
+###############################Arriba(https://arriba.readthedocs.io/en/latest/)
 docker_cmd3=docker_raw+" sh /reference/arriba_fusion.sh /project/%s /project/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
 subprocess.check_call(docker_cmd3,shell=True)
 ###############################fusioncatcher

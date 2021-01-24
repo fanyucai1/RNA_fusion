@@ -45,5 +45,5 @@ subprocess.check_call(docker_cmd3,shell=True)
 ###############################fusioncatcher
 docker_cmd4=docker_raw+" /software/fusioncatcher-1.20/bin/fusioncatcher -d /reference/fusioncatcher/human_v98/ -o /project/fusioncatcher/ -i /project/raw_data/ --config=/reference/fusioncatcher/configuration.cfg"
 subprocess.check_call(docker_cmd4,shell=True)
-###############################fusion_report
+###############################fusion_report(https://github.com/matq007/fusion-report)
 #docker_cmd5=docker_raw+" /software/python3/Python-v3.7.0/bin/fusion_report run %s /project/fusion_report /reference/fusion_report/ -arriba /project/ --pizzly --fusioncatcher --starfusion  "

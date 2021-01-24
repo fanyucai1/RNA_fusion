@@ -40,7 +40,7 @@ if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
 docker_cmd2=docker_raw+" sh /reference/STAR_fusion.sh /project/raw_data/%s /project/raw_data/%s /project/star_fusion"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
 subprocess.check_call(docker_cmd2,shell=True)
 ###############################Arriba(https://arriba.readthedocs.io/en/latest/)
-docker_cmd3=docker_raw+" sh /reference/arriba_fusion.sh /project/%s /project/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
+docker_cmd3=docker_raw+" sh /reference/arriba_fusion.sh /project/raw_data/%s /project/raw_data/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
 subprocess.check_call(docker_cmd3,shell=True)
 ###############################fusioncatcher
 docker_cmd4=docker_raw+" /software/fusioncatcher-1.20/bin/fusioncatcher -d /reference/fusioncatcher/human_v98/ -o /project/fusioncatcher/ -i /project/raw_data/ --config=/reference/fusioncatcher/configuration.cfg"

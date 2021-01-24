@@ -37,8 +37,9 @@ if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
                    "--fasta /reference/kallisto/Homo_sapiens.GRCh38.cdna.all.fa.gz --output /project/pizzy/output/%s /project/pizzy/output/fusion.txt"%(args.prefix)
     subprocess.check_call(docker_cmd1,shell=True)
 ###############################star_fusion(https://github.com/STAR-Fusion/STAR-Fusion/wiki)
-docker_cmd2=docker_raw+" sh /reference/STAR_fusion.sh /project/raw_data/%s /project/raw_data/%s /project/star_fusion"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
-subprocess.check_call(docker_cmd2,shell=True)
+if not os.path.exists('%s/star_fusion/star-fusion.fusion_predictions.tsv'%(args.outdir)):
+    docker_cmd2=docker_raw+" sh /reference/STAR_fusion.sh /project/raw_data/%s /project/raw_data/%s /project/star_fusion"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
+    subprocess.check_call(docker_cmd2,shell=True)
 ###############################Arriba(https://arriba.readthedocs.io/en/latest/)
 docker_cmd3=docker_raw+" sh /reference/arriba_fusion.sh /project/raw_data/%s /project/raw_data/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
 subprocess.check_call(docker_cmd3,shell=True)

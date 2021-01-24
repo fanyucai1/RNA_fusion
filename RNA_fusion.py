@@ -40,6 +40,10 @@ if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
                    "--align-score 2 --insert-size 400 " \
                    "--fasta /reference/kallisto/Homo_sapiens.GRCh38.cdna.all.fa.gz --output /project/pizzy/output/%s /project/pizzy/output/fusion.txt"%(args.prefix)
     subprocess.check_call(docker_cmd1,shell=True)
+if not os.path.exists("%s/pizzy/output/%s_genetable.txt"%((args.outdir,args.prefix))):
+    docker_tmp=docker_raw+"/software/python3/Python-v3.7.0/bin/python3 /software/pizzly-0.37.3/scripts//software/pizzly-0.37.3/scripts/flatten_json.py " \
+                          "/project/pizzy/output/%s.json /project/pizzy/output/%s_genetable.txt"%(args.prefix,args.prefix)
+    subprocess.check_call(docker_tmp,shell=True)
 ###############################star_fusion(https://github.com/STAR-Fusion/STAR-Fusion/wiki)
 if not os.path.exists('%s/star_fusion/star-fusion.fusion_predictions.tsv'%(args.outdir)):
     docker_cmd2=docker_raw+" sh /reference/STAR_fusion/STAR_fusion.sh /project/raw_data/%s /project/raw_data/%s /project/star_fusion"%(os.path.basename(args.pe1),os.path.basename(args.pe2))

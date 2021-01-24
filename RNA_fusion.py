@@ -42,7 +42,7 @@ subprocess.check_call(docker_cmd2,shell=True)
 ###############################Arriba(https://arriba.readthedocs.io/en/latest/)
 docker_cmd3=docker_raw+" sh /reference/arriba_fusion.sh /project/raw_data/%s /project/raw_data/%s"%(os.path.basename(args.pe1),os.path.basename(args.pe2))
 subprocess.check_call(docker_cmd3,shell=True)
-###############################fusioncatcher
+###############################fusioncatcher123
 docker_cmd4=docker_raw+" /software/fusioncatcher-1.20/bin/fusioncatcher -d /reference/fusioncatcher/human_v98/ -o /project/fusioncatcher/ -i /project/raw_data/ --config=/reference/fusioncatcher/configuration.cfg"
 subprocess.check_call(docker_cmd4,shell=True)
 ###############################fusion_report(https://github.com/matq007/fusion-report)

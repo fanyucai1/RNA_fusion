@@ -61,4 +61,8 @@ docker_cmd5=docker_raw+" /software/python3/Python-v3.7.0/bin/fusion_report run %
                        "/reference/fusion_report/ --arriba /project/Arriba/fusions.tsv --pizzly /project/pizzy/output/%s_genetable.txt " \
                        "--fusioncatcher /project/fusioncatcher/final-list_candidate-fusion-genes.txt " \
                        "--starfusion /project/star_fusion/star-fusion.fusion_predictions.tsv "%(args.prefix,args.prefix)
+if args.dragen!="false" and os.path.exists(args.dragen):
+    subprocess.check_call('mkdir -p %s/dragen_RNA'%(args.outdir),shell=True)
+    subprocess.check_call('cp %s %s/dragen_RNA/'%(args.dragen,args.outdir),shell=True)
+    docker_cmd5+=" --dragen %s/dragen_RNA/%s "%(args.outdir,os.path.basename(args.dragen))
 subprocess.check_call(docker_cmd5,shell=True)

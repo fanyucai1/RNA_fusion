@@ -30,7 +30,7 @@ if args.dragen!="false" and os.path.exists(args.dragen):
     subprocess.check_call('mkdir -p %s/dragen_RNA'%(args.outdir),shell=True)
     subprocess.check_call('cp %s %s/dragen_RNA/'%(args.dragen,args.outdir),shell=True)
 ###############################
-docker_raw="docker run -t -i -v %s:/reference/ -v %s:/project/ %s "%(args.ref,args.outdir,docker_name)
+docker_raw="docker run -v %s:/reference/ -v %s:/project/ %s "%(args.ref,args.outdir,docker_name)
 ###############################pizzy(https://github.com/pmelsted/pizzly)
 if not os.path.exists("%s/pizzy/output/fusion.txt"%((args.outdir))):
     docker_cmd=docker_raw+"/software/kallisto quant -i /reference/kallisto/index.idx --fusion " \

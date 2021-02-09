@@ -1,4 +1,7 @@
-import sys
+#Email:yucai.fan@illumina.com
+#2021.02.09
+#verison:1.0
+
 import subprocess
 import os
 import argparse
@@ -10,7 +13,6 @@ parse.add_argument("-p1","--pe1",help="R1 fastq",required=True)
 parse.add_argument("-p2","--pe2",help="R2 fastq",required=True)
 parse.add_argument("-r","--ref",help="reference data directory",required=True)
 parse.add_argument("-p","--prefix",help="prefix of output",required=True)
-parse.add_argument("-o","--outdir",help="output directory",required=True)
 parse.add_argument("-d","--dragen",help="dragen RNA fusion result",default="false")
 args=parse.parse_args()
 ###############################

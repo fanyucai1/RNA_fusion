@@ -32,8 +32,6 @@
                                 true or false
           -dr DRAGEN_REF, --dragen_ref DRAGEN_REF
                                 directory dragen hash table,the version:hg38_graph
-    
-
 
 5. output: 
    

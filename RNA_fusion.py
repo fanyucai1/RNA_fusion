@@ -5,6 +5,7 @@
 import subprocess
 import os
 import argparse
+import time
 
 docker_name="rna:latest"
 
@@ -13,9 +14,11 @@ parse.add_argument("-p1","--pe1",help="R1 fastq",required=True)
 parse.add_argument("-p2","--pe2",help="R2 fastq",required=True)
 parse.add_argument("-r","--ref",help="reference data directory",required=True)
 parse.add_argument("-p","--prefix",help="prefix of output",required=True)
-parse.add_argument("-d","--dragen",help="dragen RNA fusion result",default="false")
+parse.add_argument("-d","--dragen",help="true or false",default="false",choices=["true","false"])
+parse.add_argument("-dr","--dragen_ref",help="directory dragen hash table,the version:hg38_graph")
 args=parse.parse_args()
 ###############################
+start=time.time()
 outdir=""
 if os.path.dirname(args.pe1)!=os.path.dirname(args.pe2):
     print("%s and %s must be in the same directory." % (args.pe1,args.pe2))
@@ -66,8 +69,15 @@ docker_cmd5=docker_raw+" /software/python3/Python-v3.7.0/bin/fusion_report run %
                        "/reference/fusion_report/ --arriba /project/Arriba/fusions.tsv --pizzly /project/pizzy/output/%s_genetable.txt " \
                        "--fusioncatcher /project/fusioncatcher/final-list_candidate-fusion-genes.txt " \
                        "--starfusion /project/star_fusion/star-fusion.fusion_predictions.tsv "%(args.prefix,args.prefix)
-if args.dragen!="false" and os.path.exists(args.dragen):
-    subprocess.check_call('mkdir -p %s/dragen_RNA'%(outdir),shell=True)
-    subprocess.check_call('cp %s %s/dragen_RNA/'%(args.dragen,outdir),shell=True)
-    docker_cmd5+=" --dragen %s/dragen_RNA/%s "%(outdir,os.path.basename(args.dragen))
+if args.dragen != "false":
+    subprocess.check_call('mkdir -p %s/dragen' % (outdir), shell=True)
+    if not os.path.exists("%s/dragen_RNA/%s.fusion_candidates.final"%(outdir,args.prefix)):
+        dragen_cmd="dragen -f -r %s -1 %s -2 %s -a %s/gtf/gencode.v37.chr_patch_hapl_scaff.annotation.gtf --output-dir %s/dragen/  --output-file-prefix %s --Mapper.max-intron-bases=100000 --rna-gf-min-cis-distance 100000 " \
+                   " --rna-gf-min-score 0.35 --RGID dragen_RGID --RGSM illumina --enable-rna true --enable-rna-gene-fusion true "%(args.dragen_ref,args.pe1,args.pe2,args.ref,outdir,args.prefix)
+        subprocess.check_call(dragen_cmd,shell=True)
+    docker_cmd5 += " --dragen /project/dragen/%s.fusion_candidates.final " % (args.prefix)
 subprocess.check_call(docker_cmd5,shell=True)
+subprocess.check_call("mkdir -p %s/fusion_final_report && mv %s/fusion_report/index.html %s/fusion_final_report && rm -rf %s/fusion_report/"
+                      %(outdir,outdir,outdir,outdir),shell=True)
+end=time.time()
+print("Elapse time is %g seconds" %(end-start))

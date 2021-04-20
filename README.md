@@ -16,10 +16,29 @@
 
         python3 RNA_fusion.py -p1 /staging/fanyucai/fusion/UHR_S4_L001_R1_001.fastq.gz -p2 /staging/fanyucai/fusion/UHR_S4_L001_R2_001.fas tq.gz -r /staging3/RNA_fusion/reference/ -dr /staging/reference/hg38_rna/ -p test -d true
 
+5. usage:
+
+        python3 RNA_fusion.py --help
+        usage: This script will analysis RNA fusion. [-h] -p1 PE1 -p2 PE2 -r REF -p PREFIX [-d {true,false}] [-dr DRAGEN_REF]
+        
+        optional arguments:
+          -h, --help            show this help message and exit
+          -p1 PE1, --pe1 PE1    R1 fastq
+          -p2 PE2, --pe2 PE2    R2 fastq
+          -r REF, --ref REF     reference data directory
+          -p PREFIX, --prefix PREFIX
+                                prefix of output
+          -d {true,false}, --dragen {true,false}
+                                true or false
+          -dr DRAGEN_REF, --dragen_ref DRAGEN_REF
+                                directory dragen hash table,the version:hg38_graph
+    
+
+
 5. output: 
    
 [index.html](./index.html)
-   
+
 6. Run time
 
     TruSight RNA fusion(1397.71 seconds).

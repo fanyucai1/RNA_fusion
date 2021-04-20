@@ -1,8 +1,9 @@
 # RNAseq学习笔记
 
-docker_images:
+1.  docker_images:<br>
+rna:latest
 
-
+2. dragen+pizzy
 
 
 ## 参考文献

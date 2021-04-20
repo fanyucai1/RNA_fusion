@@ -16,8 +16,9 @@
 
         python3 RNA_fusion.py -p1 /staging/fanyucai/fusion/UHR_S4_L001_R1_001.fastq.gz -p2 /staging/fanyucai/fusion/UHR_S4_L001_R2_001.fas tq.gz -r /staging3/RNA_fusion/reference/ -dr /staging/reference/hg38_rna/ -p test -d true
 
-5. output:
-   (./index.html)[./index.html]
+5. output: 
+   
+[index.html](./index.html)
    
 6. Run time
 

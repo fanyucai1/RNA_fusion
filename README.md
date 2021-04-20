@@ -1,15 +1,14 @@
 # RNAseq学习笔记
 
-1.  docker_images:<br>
-rna:latest
+1.  download docker images:**rna:latest**
 
 2. RNA fusion find using software as following:<br>
    
-           dragen(ref hash table must be hg38)
-           pizzy(0.37.3)
-           Arriba(2.0.0)
-           star_fusion(v1.9.1)
-           fusioncatcher(1.20)
+       dragen(ref hash table must be hg38)
+       pizzy(0.37.3)
+       Arriba(2.0.0)
+       star_fusion(v1.9.1)
+       fusioncatcher(1.20)
 
 3. The result was combined by **fusion_report**
 

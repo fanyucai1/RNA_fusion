@@ -19,8 +19,7 @@ rna:latest
 
 5. output:
    (./index.html)[./index.html]
-
-
+   
 6. Run time
 
     TruSight RNA fusion(1397.71 seconds).

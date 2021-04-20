@@ -3,8 +3,27 @@
 1.  docker_images:<br>
 rna:latest
 
-2. dragen+pizzy
+2. RNA fusion find using software as following:<br>
+   
+           dragen(ref hash table must be hg38)
+           pizzy(0.37.3)
+           Arriba(2.0.0)
+           star_fusion(v1.9.1)
+           fusioncatcher(1.20)
 
+3. The result was combined by **fusion_report**
+
+4. Example command:
+
+        python3 RNA_fusion.py -p1 /staging/fanyucai/fusion/UHR_S4_L001_R1_001.fastq.gz -p2 /staging/fanyucai/fusion/UHR_S4_L001_R2_001.fas tq.gz -r /staging3/RNA_fusion/reference/ -dr /staging/reference/hg38_rna/ -p test -d true
+
+5. output:
+   (./index.html)[./index.html]
+
+
+6. Run time
+
+    TruSight RNA fusion(1397.71 seconds).
 
 ## 参考文献
 

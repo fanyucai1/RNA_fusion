@@ -1,6 +1,6 @@
 #Email:yucai.fan@illumina.com
 #2021.04.21
-#verison:1.0
+#verison:2.0
 
 import subprocess
 import os

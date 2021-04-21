@@ -82,7 +82,7 @@ if args.dragen != "false":
     for line in infile:
         num+=1
         line=line.strip()
-        if num!=0:
+        if num!=1:
             if int(line.split("\t")[6])>=3:
                 outfile.write("%s\n"%(line))
         else:
